@@ -1,0 +1,23 @@
+{
+    "name": "yc-open/chat-doc",
+    "description": "ChatDoc",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "YcOpen\\ChatDoc\\": "src/"
+        },
+        "files": [
+            "./src/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Unknown",
+            "email": "unknown.renlong@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.7",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
