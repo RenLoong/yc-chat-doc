@@ -11,11 +11,11 @@ composer require yc-open/chat-doc
 require_once __DIR__ . '/vendor/autoload.php';
 try {
     $options=[
-        # 缓存驱动类，实例化后的对象，需要实现get、set、delete方法
+        # 缓存驱动类，需要实现get、set、delete方法
         # cache->get($key);
         # cache->set($key, $data, $expire = 0);
         # cache->delete($key);
-        # 'cache'=>new Cache,
+        # 'cache'=>Cache::class,
         # 有写入权限的目录，用于存储access_token，优先使用cache，当二者都为空时手动处理
         # 'runtime'=>'/runtime',
         # 项目KEY
