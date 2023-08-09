@@ -10,7 +10,7 @@ class Request
 {
     const API_VERSION_V2 = 'v2/';
     const CACHE_KEY = 'YC_CHAT_DOC_ACCESS_TOKEN';
-    protected $baseUrl = 'https://www.chat-doc.net/app/ycChatdoc/RestfullApi/';
+    protected $baseUrl = 'https://chatdoc.kaifa.cc/app/ycChatdoc/RestfullApi/';
     protected $version = '';
     protected $url;
     protected $params = [];
@@ -25,7 +25,7 @@ class Request
     protected $isDownFile = false;
     protected $offAutoAddToken = false;
     protected $timeout = 60;
-    public function __construct(mixed $options=null)
+    public function __construct(mixed $options = null)
     {
         $baseUrl = chat_doc_env('YC_CHAT_DOC_BASE_URL');
         if ($baseUrl) {
@@ -162,23 +162,25 @@ class Request
     }
     private function autoAddToken()
     {
-        if($this->offAutoAddToken){return;}
-        if(empty($this->headers['Authorization'])){
-            $access_token='';
-            if($this->cache){
-                $access_token=$this->cache->get(Request::CACHE_KEY);
-            }else if($this->runtime){
-                $_content=file_get_contents($this->runtime.'/'.Request::CACHE_KEY);
-                try{
-                    $_content=json_decode($_content,true);
-                    if($_content['expire']>time()){
-                        $access_token=$_content['access_token'];
+        if ($this->offAutoAddToken) {
+            return;
+        }
+        if (empty($this->headers['Authorization'])) {
+            $access_token = '';
+            if ($this->cache) {
+                $access_token = $this->cache->get(Request::CACHE_KEY);
+            } else if ($this->runtime) {
+                $_content = file_get_contents($this->runtime . '/' . Request::CACHE_KEY);
+                try {
+                    $_content = json_decode($_content, true);
+                    if ($_content['expire'] > time()) {
+                        $access_token = $_content['access_token'];
                     }
-                }catch(\Throwable $e){
-                    $access_token='';
+                } catch (\Throwable $e) {
+                    $access_token = '';
                 }
             }
-            if($access_token){
+            if ($access_token) {
                 $this->setToken($access_token);
             }
         }
